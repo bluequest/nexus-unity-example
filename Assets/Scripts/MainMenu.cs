@@ -47,10 +47,8 @@ public class MainMenu : MonoBehaviour
                     Debug.LogError(String.Format("Something went wrong: {0}", webRequest.error));
                     break;
                 case UnityWebRequest.Result.Success:
-                    print("Success");
                     Fact fact = JsonConvert.DeserializeObject<Fact>(webRequest.downloadHandler.text);
                     text.text = fact.fact;
-                    print(fact.fact);
                     break;
             }
         }
