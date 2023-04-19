@@ -48,7 +48,6 @@ public class MainMenu : MonoBehaviour
     }
 
     public void GetCreators() {
-        print("asdfasfasf");
         StartCoroutine(GetCreatorsRequest("https://api.nexus.gg/v1/attributions/creators"));
     }
 
@@ -74,10 +73,11 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    IEnumerator GetCreatorsRequest(String uri)
+    IEnumerator GetCreatorsRequest(string uri)
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri + "?token="+APIKey))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
+            webRequest.SetRequestHeader("x-shared-secret", APIKey);
             yield return webRequest.SendWebRequest();
 
             switch (webRequest.result)
