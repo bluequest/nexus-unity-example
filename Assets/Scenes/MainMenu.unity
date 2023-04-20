@@ -4589,8 +4589,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6610,8 +6610,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8567,13 +8567,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PingAttributionsButton: {fileID: 1407252839}
   GetCreatorsButton: {fileID: 1901154948}
-  GetCreatorByIdButton: {fileID: 304428188}
+  GetCreatorByIdButton: {fileID: 617465312}
   outputTextPing: {fileID: 509255679}
   outputTextGetCreators: {fileID: 671390642}
   InputField_Page: {fileID: 926405678}
   InputField_PageSize: {fileID: 1857275780}
   InputField_GroupId: {fileID: 1587458512}
   outputTextGetCreatorById: {fileID: 500213212}
+  InputField_CreatorSlugOrId: {fileID: 269409571}
 --- !u!4 &883973654
 Transform:
   m_ObjectHideFlags: 0

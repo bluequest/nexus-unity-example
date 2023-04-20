@@ -106,11 +106,22 @@ public class NexusAPI_Attributions : MonoBehaviour
     }
     IEnumerator GetCreatorsRequest(GetCreatorsParameters parameters)
     {
-        string uri = "https://api.nexus.gg/v1/attributions/creators" + "?" + "page=" + parameters.page + "&" + "pageSize=" + parameters.pageSize;
+        string uri = "https://api.nexus.gg/v1/attributions/creators";
 
+
+        if (parameters.page != null)
+        {
+            uri = uri + "?page=" + parameters.page;
+        }
+        if (parameters.pageSize != null)
+        {
+            uri = uri.Contains("?") ? uri + "&" : uri + "?";
+            uri = uri + "pageSize=" + parameters.pageSize;
+        }
         if (parameters.groupId != "")
         {
-            uri = uri + "&" + parameters.groupId;
+            uri = uri.Contains("?") ? uri + "&" : uri + "?";
+            uri = uri + parameters.groupId;
         }
 
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
@@ -128,8 +139,8 @@ public class NexusAPI_Attributions : MonoBehaviour
                     break;
                 case UnityWebRequest.Result.Success:
                     print(String.Format("Success: {0}", webRequest.error));
-                    print(webRequest.downloadHandler.text);
                     CreatorsRequest creatorsRequest = JsonConvert.DeserializeObject<CreatorsRequest>(webRequest.downloadHandler.text);
+                    outputTextGetCreators.text = webRequest.downloadHandler.text;
                     break;
             }
         }
@@ -163,13 +174,20 @@ public class NexusAPI_Attributions : MonoBehaviour
     }
 
     public TextMeshProUGUI outputTextGetCreatorById;
+    public GameObject InputField_CreatorSlugOrId;
 
     public void GetCreatorById(CreatorByIdParameters parameters) {
+        parameters.creatorSlugOrId = InputField_CreatorSlugOrId.GetComponent<TMP_InputField>().text;
         StartCoroutine(GetCreatorByIdRequest(parameters));
     }
     IEnumerator GetCreatorByIdRequest(CreatorByIdParameters parameters)
     {
-        string uri = "https://api.nexus.gg/v1/attributions/creators/" + parameters.creatorSlugOrId;
+        string uri = "https://api.nexus.gg/v1/attributions/creators/";
+
+        if (parameters.creatorSlugOrId != "")
+        {
+            uri = uri + "?creatorSlugOrId=" + parameters.creatorSlugOrId;
+        }
 
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
@@ -186,8 +204,8 @@ public class NexusAPI_Attributions : MonoBehaviour
                     break;
                 case UnityWebRequest.Result.Success:
                     print(String.Format("Success: {0}", webRequest.error));
-                    print(webRequest.downloadHandler.text);
                     CreatorById CreatorByID = JsonConvert.DeserializeObject<CreatorById>(webRequest.downloadHandler.text);
+                    outputTextGetCreatorById.text = webRequest.downloadHandler.text;
                     break;
             }
         }
