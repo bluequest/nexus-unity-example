@@ -3,28 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using Newtonsoft.Json;
 using TMPro;
 
 public class NexusAPI_Referrals : MonoBehaviour
 {
-    public string APIKey;
-
     public Button referralByPlayerIdButton;
     public Button referralCodeByPlayerIdButton;
     public Button referralInfoByCodeButton;
 
-    void OnEnable()
-    {
-        //Register Button Events
-        referralByPlayerIdButton.onClick.AddListener(() => GetReferralByPlayerID("dusty", ""));
-    }
+    // void OnEnable()
+    // {
+    //     //Register Button Events
+    //     referralByPlayerIdButton.onClick.AddListener(() => GetReferralByPlayerID("dusty", ""));
+    // }
 
-    void OnDisable()
-    {
-        //Un-Register Button Events
-        referralByPlayerIdButton.onClick.RemoveAllListeners();
-    }
+    // void OnDisable()
+    // {
+    //     //Un-Register Button Events
+    //     referralByPlayerIdButton.onClick.RemoveAllListeners();
+    // }
 
     public class InvalidGroupError
     {
@@ -67,7 +66,7 @@ public class NexusAPI_Referrals : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri + playerId))
         {
-            webRequest.SetRequestHeader("x-shared-secret", APIKey);
+            webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
             yield return webRequest.SendWebRequest();
 
             switch (webRequest.result)
@@ -95,7 +94,7 @@ public class NexusAPI_Referrals : MonoBehaviour
     // {
     //     using (UnityWebRequest webRequest = UnityWebRequest.Get(uri + playerId + "/code"))
     //     {
-    //         webRequest.SetRequestHeader("x-shared-secret", APIKey);
+    //         webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
     //         yield return webRequest.SendWebRequest();
 
     //         switch (webRequest.result)
@@ -125,7 +124,7 @@ public class NexusAPI_Referrals : MonoBehaviour
     // {
     //     using (UnityWebRequest webRequest = UnityWebRequest.Get(uri + referralCode))
     //     {
-    //         webRequest.SetRequestHeader("x-shared-secret", APIKey);
+    //         webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
     //         yield return webRequest.SendWebRequest();
 
     //         switch (webRequest.result)

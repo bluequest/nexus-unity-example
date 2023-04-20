@@ -8,8 +8,6 @@ using TMPro;
 
 public class NexusAPI_ : MonoBehaviour
 {
-    public string APIKey;
-
 
     public class InvalidGroupError
     {
@@ -109,7 +107,7 @@ public class NexusAPI_ : MonoBehaviour
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
-            webRequest.SetRequestHeader("x-shared-secret", APIKey);
+            webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
             yield return webRequest.SendWebRequest();
 
             switch (webRequest.result)

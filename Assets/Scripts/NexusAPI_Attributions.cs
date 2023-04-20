@@ -2,20 +2,48 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using TMPro;
 
+
+
 public class NexusAPI_Attributions : MonoBehaviour
 {
-    public string APIKey;
+    public Button PingAttributionsButton;
+    public Button GetCreatorsButton;
+    public Button GetCreatorByIdButton;
 
+
+    void OnEnable()
+    {
+        //Register Button Events
+        PingAttributionsButton.onClick.AddListener(() => PingAttributions());
+
+        GetCreatorsParameters getCreatorsParameters = new GetCreatorsParameters(1, 100, "");
+        GetCreatorsButton.onClick.AddListener(() => GetCreators(getCreatorsParameters));
+
+        CreatorByIdParameters getCreatorByIdParameters = new CreatorByIdParameters("dusty");
+        GetCreatorByIdButton.onClick.AddListener(() => GetCreatorById(getCreatorByIdParameters));
+    }
+    void OnDisable()
+    {
+        //Un-Register Button Events
+        PingAttributionsButton.onClick.RemoveAllListeners();
+        GetCreatorsButton.onClick.RemoveAllListeners();
+        GetCreatorByIdButton.onClick.RemoveAllListeners();
+    }
+
+    public TextMeshProUGUI outputTextPing;
 
     public void PingAttributions() {
-        StartCoroutine(GetCreatorsRequest("https://api.nexus.gg/v1/attributions/ping"));
+        StartCoroutine(PingAttributionsRequest());
     }
-    IEnumerator PingAttributionsRequest(string uri)
+    IEnumerator PingAttributionsRequest()
     {
+        string uri = "https://api.nexus.gg/v1/attributions/ping";
+
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
             yield return webRequest.SendWebRequest();
@@ -24,9 +52,11 @@ public class NexusAPI_Attributions : MonoBehaviour
             {
                 case UnityWebRequest.Result.ConnectionError:
                     Debug.LogError(String.Format("Connection Error: {0}", webRequest.error));
+                    outputTextPing.text = String.Format("Connection Error: {0}", webRequest.error);
                     break;
                 case UnityWebRequest.Result.Success:
                     print(String.Format("Success"));
+                    outputTextPing.text = "Success";
                     break;
             }
         }
@@ -34,6 +64,19 @@ public class NexusAPI_Attributions : MonoBehaviour
 
 
 
+    public struct GetCreatorsParameters
+    {
+        public Nullable<int> page { get; set; }
+        public Nullable<int> pageSize { get; set; }
+        public string groupId { get; set; }
+
+        public GetCreatorsParameters(int Page, int PageSize, string GroupId)
+        {
+            page = Page;
+            pageSize = PageSize;
+            groupId = GroupId;
+        }
+    }
     public class Creator
     {
         public string id { get; set; }
@@ -49,14 +92,30 @@ public class NexusAPI_Attributions : MonoBehaviour
         public List<Creator> creators { get; set; }
     }
 
-    public void GetCreators() {
-        StartCoroutine(GetCreatorsRequest("https://api.nexus.gg/v1/attributions/creators"));
+    public TextMeshProUGUI outputTextGetCreators;
+    public GameObject InputField_Page;
+    public GameObject InputField_PageSize;
+    public GameObject InputField_GroupId;
+
+    public void GetCreators(GetCreatorsParameters parameters) {
+        parameters.page = InputField_Page.GetComponent<TMP_InputField>().text == "" ? null : int.Parse(InputField_Page.GetComponent<TMP_InputField>().text);
+        parameters.pageSize = InputField_PageSize.GetComponent<TMP_InputField>().text == "" ? null : int.Parse(InputField_PageSize.GetComponent<TMP_InputField>().text);
+        parameters.groupId = InputField_GroupId.GetComponent<TMP_InputField>().text;
+
+        StartCoroutine(GetCreatorsRequest(parameters));
     }
-    IEnumerator GetCreatorsRequest(String uri)
+    IEnumerator GetCreatorsRequest(GetCreatorsParameters parameters)
     {
+        string uri = "https://api.nexus.gg/v1/attributions/creators" + "?" + "page=" + parameters.page + "&" + "pageSize=" + parameters.pageSize;
+
+        if (parameters.groupId != "")
+        {
+            uri = uri + "&" + parameters.groupId;
+        }
+
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
-            webRequest.SetRequestHeader("x-shared-secret", APIKey);
+            webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
             yield return webRequest.SendWebRequest();
 
             switch (webRequest.result)
@@ -70,7 +129,7 @@ public class NexusAPI_Attributions : MonoBehaviour
                 case UnityWebRequest.Result.Success:
                     print(String.Format("Success: {0}", webRequest.error));
                     print(webRequest.downloadHandler.text);
-                    CreatorsRequest CreatorsRequest = JsonConvert.DeserializeObject<CreatorsRequest>(webRequest.downloadHandler.text);
+                    CreatorsRequest creatorsRequest = JsonConvert.DeserializeObject<CreatorsRequest>(webRequest.downloadHandler.text);
                     break;
             }
         }
@@ -78,13 +137,22 @@ public class NexusAPI_Attributions : MonoBehaviour
 
 
 
+    public struct CreatorByIdParameters
+    {
+        public string creatorSlugOrId { get; set; } 
+
+        public CreatorByIdParameters(string CreatorSlugOrId)
+        {
+            creatorSlugOrId = CreatorSlugOrId;
+        }
+    }
     public class Group
     {
-        public string name { get; set; }
+        public string name { get; set; } 
         public string id { get; set; }
         public string status { get; set; }
     }
-    public class CreatorByID
+    public class CreatorById
     {
         public List<Group> groups { get; set; }
         public string id { get; set; }
@@ -94,14 +162,18 @@ public class NexusAPI_Attributions : MonoBehaviour
         public string profileImage { get; set; }
     }
 
-    public void GetCreatorByID(string uuid) {
-        StartCoroutine(GetCreatorByIDRequest("https://api.nexus.gg/v1/attributions/creators/", uuid));
+    public TextMeshProUGUI outputTextGetCreatorById;
+
+    public void GetCreatorById(CreatorByIdParameters parameters) {
+        StartCoroutine(GetCreatorByIdRequest(parameters));
     }
-    IEnumerator GetCreatorByIDRequest(string uri, string uuid)
+    IEnumerator GetCreatorByIdRequest(CreatorByIdParameters parameters)
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri + uuid))
+        string uri = "https://api.nexus.gg/v1/attributions/creators/" + parameters.creatorSlugOrId;
+
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
         {
-            webRequest.SetRequestHeader("x-shared-secret", APIKey);
+            webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
             yield return webRequest.SendWebRequest();
 
             switch (webRequest.result)
@@ -115,7 +187,7 @@ public class NexusAPI_Attributions : MonoBehaviour
                 case UnityWebRequest.Result.Success:
                     print(String.Format("Success: {0}", webRequest.error));
                     print(webRequest.downloadHandler.text);
-                    CreatorByID CreatorByID = JsonConvert.DeserializeObject<CreatorByID>(webRequest.downloadHandler.text);
+                    CreatorById CreatorByID = JsonConvert.DeserializeObject<CreatorById>(webRequest.downloadHandler.text);
                     break;
             }
         }
