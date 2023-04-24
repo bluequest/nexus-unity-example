@@ -5,13 +5,15 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using Newtonsoft.Json;
-using TMPro;
+
+
 
 public class NexusAPI_Referrals : MonoBehaviour
 {
     public Button referralByPlayerIdButton;
     public Button referralCodeByPlayerIdButton;
     public Button referralInfoByCodeButton;
+    
 
     // void OnEnable()
     // {
@@ -24,6 +26,7 @@ public class NexusAPI_Referrals : MonoBehaviour
     //     //Un-Register Button Events
     //     referralByPlayerIdButton.onClick.RemoveAllListeners();
     // }
+
 
     public class InvalidGroupError
     {

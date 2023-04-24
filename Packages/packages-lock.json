@@ -264,6 +264,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "nexus.sdk": {
+      "version": "file:NexusSDK",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
