@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
-using TMPro;
 
 public class NexusAPI_ : MonoBehaviour
 {
@@ -126,7 +125,6 @@ public class NexusAPI_ : MonoBehaviour
             }
         }
     }
-
 
 
 

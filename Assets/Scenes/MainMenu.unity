@@ -1831,7 +1831,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 267663823}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: NexusAPI_Attributions, Assembly-CSharp
         m_MethodName: 
         m_Mode: 5
@@ -2557,7 +2557,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 267663823}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: NexusAPI_Attributions, Assembly-CSharp
         m_MethodName: 
         m_Mode: 5
@@ -2607,53 +2607,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259815932}
   m_CullTransparentMesh: 1
---- !u!1 &267663823
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 267663825}
-  - component: {fileID: 267663824}
-  m_Layer: 0
-  m_Name: ReferralsScript
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &267663824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267663823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9894c646ac288804180a6151bd3ec6be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  referralByPlayerIdButton: {fileID: 0}
-  referralCodeByPlayerIdButton: {fileID: 0}
-  referralInfoByCodeButton: {fileID: 0}
---- !u!4 &267663825
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 267663823}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -71.98071, y: 8.997192, z: 0.94921875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 856552096}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &269409571
 GameObject:
   m_ObjectHideFlags: 0
@@ -4589,8 +4542,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5739,6 +5692,7 @@ GameObject:
   - component: {fileID: 617465314}
   - component: {fileID: 617465313}
   - component: {fileID: 617465312}
+  - component: {fileID: 617465315}
   m_Layer: 5
   m_Name: CreatorByID_PanelBtn
   m_TagString: Untagged
@@ -5849,6 +5803,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 617465310}
   m_CullTransparentMesh: 1
+--- !u!114 &617465315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617465310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6539c9abe63fc914ca93c61be8f368e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GetCreatorByIdButton: {fileID: 617465312}
+  outputTextField: {fileID: 500213212}
+  InputField_CreatorSlugOrId: {fileID: 269409571}
 --- !u!1 &629758153
 GameObject:
   m_ObjectHideFlags: 0
@@ -6610,8 +6579,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8530,64 +8499,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 994119082}
-  - {fileID: 883973654}
-  - {fileID: 267663825}
-  - {fileID: 1780821902}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &883973652
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 883973654}
-  - component: {fileID: 883973653}
-  m_Layer: 0
-  m_Name: AttributionsScript
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &883973653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 883973652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 010ec0fb3a2272a4792666e7c532e872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PingAttributionsButton: {fileID: 1407252839}
-  GetCreatorsButton: {fileID: 1901154948}
-  GetCreatorByIdButton: {fileID: 304428188}
-  outputTextPing: {fileID: 509255679}
-  outputTextGetCreators: {fileID: 671390642}
-  InputField_Page: {fileID: 926405678}
-  InputField_PageSize: {fileID: 1857275780}
-  InputField_GroupId: {fileID: 1587458512}
-  outputTextGetCreatorById: {fileID: 500213212}
---- !u!4 &883973654
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 883973652}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -71.98071, y: 8.997192, z: 0.94921875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 856552096}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &887751204
 GameObject:
@@ -14441,6 +14354,7 @@ GameObject:
   - component: {fileID: 1407252841}
   - component: {fileID: 1407252840}
   - component: {fileID: 1407252839}
+  - component: {fileID: 1407252842}
   m_Layer: 5
   m_Name: Ping_PanelBtn
   m_TagString: Untagged
@@ -14551,6 +14465,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407252837}
   m_CullTransparentMesh: 1
+--- !u!114 &1407252842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407252837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad61f1287bcd2b140af4b47f0c17b7d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PingAttributionsButton: {fileID: 1407252839}
+  outputTextField: {fileID: 0}
 --- !u!1 &1414651898
 GameObject:
   m_ObjectHideFlags: 0
@@ -20129,37 +20057,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
---- !u!1 &1780821901
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1780821902}
-  m_Layer: 0
-  m_Name: BountiesScript
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1780821902
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780821901}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -71.98071, y: 8.997192, z: 0.94921875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 856552096}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1799874000
 GameObject:
   m_ObjectHideFlags: 0
@@ -21495,6 +21392,7 @@ GameObject:
   - component: {fileID: 1901154950}
   - component: {fileID: 1901154949}
   - component: {fileID: 1901154948}
+  - component: {fileID: 1901154951}
   m_Layer: 5
   m_Name: GetCreators_PanelBtn
   m_TagString: Untagged
@@ -21605,6 +21503,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901154946}
   m_CullTransparentMesh: 1
+--- !u!114 &1901154951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901154946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e76ca5b6e7d4f47979f90c4b1775c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GetCreatorsButton: {fileID: 1901154948}
+  outputTextField: {fileID: 671390642}
+  InputField_Page: {fileID: 926405678}
+  InputField_PageSize: {fileID: 1857275780}
+  InputField_GroupId: {fileID: 1587458512}
 --- !u!1 &1921399702
 GameObject:
   m_ObjectHideFlags: 0
@@ -23363,7 +23278,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 267663823}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: NexusAPI_Attributions, Assembly-CSharp
         m_MethodName: 
         m_Mode: 5

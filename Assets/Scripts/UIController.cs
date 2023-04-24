@@ -8,6 +8,12 @@ public class UIController : MonoBehaviour
     public GameObject[] UIPanels;
 
 
+    public void Start()
+    {
+        
+    }
+
+
     public void OpenPanel(GameObject openingPanel)
     {
         CloseAllPanels();
