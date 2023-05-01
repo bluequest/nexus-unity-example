@@ -107,11 +107,13 @@ namespace NexusAPI
             public string creatorSlugOrId { get; set; }
         };
 			
-        struct GetCreatorByUuid200Response
+        public struct GetCreatorByUuid200Response
         {
 
         }
         public delegate void OnGetCreatorByUuid200ResponseDelegate(GetCreatorByUuid200Response Response);
+
+        public delegate void OnGetCreatorByUuid404ResponseDelegate();
 
         public struct GetCreatorByUuidResponseCallbacks
         {
@@ -142,7 +144,7 @@ namespace NexusAPI
                     case 404:
                     if(ResponseCallback.OnGetCreatorByUuid404Response != null)
                     {
-                        ResponseCallback.OnGetCreatorByUuid404Response(JsonConvert.DeserializeObject<GetCreatorByUuid404Response>(webRequest.downloadHandler.text));
+                        ResponseCallback.OnGetCreatorByUuid404Response();
                     }
                     break;
                     default:
@@ -157,9 +159,10 @@ namespace NexusAPI
         {
             public OnGetPing200ResponseDelegate OnGetPing200Response { get; set; }
         }
+        public delegate void OnGetPing200ResponseDelegate();
 
 
-        public static IEnumerator StartGetPingRequest(GetPingRequestParams RequestParams, GetPingResponseCallbacks ResponseCallback)
+        public static IEnumerator StartGetPingRequest(GetPingResponseCallbacks ResponseCallback)
         {
             string uri = "https://api.nexus.gg/v1/attributions/ping";
 
@@ -175,7 +178,7 @@ namespace NexusAPI
                     case 200:
                     if(ResponseCallback.OnGetPing200Response != null)
                     {
-                        ResponseCallback.OnGetPing200Response(JsonConvert.DeserializeObject<GetPing200Response>(webRequest.downloadHandler.text));
+                        ResponseCallback.OnGetPing200Response();
                     }
                     break;
                     default:
