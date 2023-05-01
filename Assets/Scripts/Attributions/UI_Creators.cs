@@ -5,8 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
-using CreatorsRequest = NexusAPI_Attributions.CreatorsRequest;
-using GetCreatorsParameters = NexusAPI_Attributions.GetCreatorsParameters;
+using GetCreatorsRequestParams = NexusAPI.AttributionAPI.GetCreatorsRequestParams;
+using GetCreatorsResponseCallbacks = NexusAPI.AttributionAPI.GetCreatorsResponseCallbacks;
+using GetCreators200Response = NexusAPI.AttributionAPI.GetCreators200Response;
 
 
 
@@ -17,8 +18,7 @@ public class UI_Creators : MonoBehaviour
     public GameObject InputField_Page;
     public GameObject InputField_PageSize;
     public GameObject InputField_GroupId;
-    CreatorsRequest CreatorsRequestResponse;
-    GetCreatorsParameters getCreatorsParameters = new GetCreatorsParameters(1, 100, "");
+    GetCreatorsRequestParams getCreatorsParameters = new GetCreatorsRequestParams();
 
 
     void OnEnable()
@@ -33,25 +33,15 @@ public class UI_Creators : MonoBehaviour
 
     void HandleButtonClick()
     {
-        getCreatorsParameters.page = InputField_Page.GetComponent<TMP_InputField>().text == "" ? null : int.Parse(InputField_Page.GetComponent<TMP_InputField>().text);
-        getCreatorsParameters.pageSize = InputField_PageSize.GetComponent<TMP_InputField>().text == "" ? null : int.Parse(InputField_PageSize.GetComponent<TMP_InputField>().text);
+        getCreatorsParameters.page = InputField_Page.GetComponent<TMP_InputField>().text == "" ? 1 : int.Parse(InputField_Page.GetComponent<TMP_InputField>().text);
+        getCreatorsParameters.pageSize = InputField_PageSize.GetComponent<TMP_InputField>().text == "" ? 100 : int.Parse(InputField_PageSize.GetComponent<TMP_InputField>().text);
         getCreatorsParameters.groupId = InputField_GroupId.GetComponent<TMP_InputField>().text;
 
-        StartCoroutine(NexusAPI_Attributions.GetCreatorsRequest(getCreatorsParameters, (Result, CreatorsRequestResponse) =>
-        {
-            switch (Result)
-            {
-                case UnityWebRequest.Result.ConnectionError:
-                    Debug.LogError(String.Format("Connection Error: {0}", Result));
-                    break;
-                case UnityWebRequest.Result.DataProcessingError:
-                    Debug.LogError(String.Format("Data Processing Error: {0}", Result));
-                    break;
-                case UnityWebRequest.Result.Success:
-                    Debug.Log(String.Format("Success"));
-                    outputTextField.text = "Success";
-                    break;
-            }
-        }));
+        StartCoroutine(NexusAPI.AttributionAPI.StartGetCreatorsRequest(getCreatorsParameters, new GetCreatorsResponseCallbacks() {OnGetCreators200Response = OnGetCreators200ResponseFunction}));
+    }
+
+    void OnGetCreators200ResponseFunction (GetCreators200Response Response)
+    {
+        
     }
 }

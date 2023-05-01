@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+// using PingAttributionsResponseCallbacks = NexusAPI.Attributions.PingAttributionsResponseCallbacks;
+
 
 
 public class UI_Ping : MonoBehaviour
 {
     public Button PingAttributionsButton;
     public TextMeshProUGUI outputTextField;
+    // public PingAttributionsResponseCallbacks responseCallbacks;
+
 
 
     void OnEnable()
@@ -22,16 +26,19 @@ public class UI_Ping : MonoBehaviour
 
     void HandleButtonClick()
     {
-        StartCoroutine(NexusAPI_Attributions.PingAttributionsRequest((isSuccess) =>
-        {
-            if (isSuccess)
-            {
-                outputTextField.text = "Success";
-            }
-            else
-            {
-                outputTextField.text = "Fail";
-            }
-        }));
+        // StartCoroutine(NexusAPI.Attributions.PingAttributionsRequest((responseCallbacks) =>
+        // {
+            
+        //     // if (responseCallbacks)
+        //     // {
+        //     //     outputTextField.text = "Success";
+        //     // }
+        //     // else
+        //     // {
+        //     //     outputTextField.text = "Fail";
+        //     // }
+        // }));
     }
+
+
 }

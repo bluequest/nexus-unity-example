@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using TMPro;
-using CreatorById = NexusAPI_Attributions.CreatorById;
-using CreatorByIdParameters = NexusAPI_Attributions.CreatorByIdParameters;
+using CreatorById = NexusAPI.Attributions.CreatorById;
+using CreatorByIdParameters = NexusAPI.Attributions.CreatorByIdParameters;
 
 
 
@@ -33,7 +33,7 @@ public class UI_CreatorByID : MonoBehaviour
     {
         getCreatorByIdParameters.creatorSlugOrId = InputField_CreatorSlugOrId.GetComponent<TMP_InputField>().text;
 
-        StartCoroutine(NexusAPI_Attributions.GetCreatorByIdRequest(getCreatorByIdParameters, (Result, CreatorByIdResponse) =>
+        StartCoroutine(NexusAPI.Attributions.GetCreatorByIdRequest(getCreatorByIdParameters, (Result, CreatorByIdResponse) =>
         {
             switch (Result)
             {
