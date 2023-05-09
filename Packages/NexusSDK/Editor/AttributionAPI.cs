@@ -4,186 +4,194 @@
 *   ANY CHANGES TO THIS FILE WILL BE OVERWRITTEN
 *	PLEASE MAKE ANY CHANGES TO THE SDK TEMPLATES IN THE SDK GENERATOR
 */
-//Schema Types
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
-
-
-namespace NexusAPI
+namespace NexusSDK
 {
-
-    public struct Creator
-    {
-            public string id { get; set; }
-            public string name { get; set; }
-            public string logoImage { get; set; }
-            public string nexusUrl { get; set; }
-            public string profileImage { get; set; }
-    }
-
-    public struct CreatorGroup
-    {
-            public string name { get; set; }
-            public string id { get; set; }
-            public string status { get; set; }
-    }
-
     public static class AttributionAPI
     {
-	
-    	public struct GetCreatorsRequestParams
-    	{
+        public struct Transaction
+        {
+            public string creatorId { get; set; }
+
+            public string currency { get; set; }
+
+            public string description { get; set; }
+
+            public string status { get; set; }
+
+            public double subtotal { get; set; }
+
+            public string transactionId { get; set; }
+
+            public DateTime transactionDate { get; set; }
+
+            public string playerId { get; set; }
+
+            public DateTime playerLastPurchase { get; set; }
+
+            public DateTime playerJoinDate { get; set; }
+
+            public string playerName { get; set; }
+        }
+
+        public struct Creator
+        {
+            public string id { get; set; }
+
+            public string name { get; set; }
+
+            public string logoImage { get; set; }
+
+            public string nexusUrl { get; set; }
+
+            public string profileImage { get; set; }
+        }
+
+        public struct CreatorGroup
+        {
+            public string name { get; set; }
+
+            public string id { get; set; }
+
+            public string status { get; set; }
+        }
+
+        public struct GetCreatorsRequestParams
+        {
             public int page { get; set; }
+
             public int pageSize { get; set; }
+
             public string groupId { get; set; }
-    	};
-                
+        }
+
         public struct GetCreators200Response
         {
-                public int currentPage { get; set; }
-                public int currentPageSize { get; set; }
-                    public Creator[] creators { get; set; }
-        }
-    	public delegate void OnGetCreators200ResponseDelegate(GetCreators200Response Response);
+            public int currentPage { get; set; }
 
+            public int currentPageSize { get; set; }
 
-    	public delegate void OnGetCreators400ResponseDelegate();
-
-    	public struct GetCreatorsResponseCallbacks
-    	{
-    			public OnGetCreators200ResponseDelegate OnGetCreators200Response { get; set; }
-    			public OnGetCreators400ResponseDelegate OnGetCreators400Response { get; set; }
-    	}
-
-
-        public static IEnumerator StartGetCreatorsRequest(GetCreatorsRequestParams RequestParams, GetCreatorsResponseCallbacks ResponseCallback)
-    	{
-    		string uri = "https://api.nexus.gg/v1/attributions/creators";
-
-            uri = uri + "?page=" + RequestParams.page;
-
-            uri = uri.Contains("?") ? uri + "&" : uri + "?";
-            uri = uri + "pageSize=" + RequestParams.pageSize;
-
-            uri = uri.Contains("?") ? uri + "&" : uri + "?";
-            uri = uri + RequestParams.groupId;
-
-
-    		using(UnityWebRequest webRequest = UnityWebRequest.Get(uri))
-    		{
-    			yield return webRequest.SendWebRequest();
-        
-    			switch(webRequest.responseCode)
-    			{
-    
-    				case 200:
-    				if(ResponseCallback.OnGetCreators200Response != null)
-    				{
-    					ResponseCallback.OnGetCreators200Response(JsonConvert.DeserializeObject<GetCreators200Response>(webRequest.downloadHandler.text));
-    				}
-    				break;
-    
-    				case 400:
-    				if(ResponseCallback.OnGetCreators400Response != null)
-    				{
-    					ResponseCallback.OnGetCreators400Response();
-    				}
-    				break;
-    				default:
-    					throw new Exception();
-    				break;					
-    			}
-    		}
-    	}
-
-
-        public struct GetCreatorByUuidRequestParams
-        {
-            public string creatorSlugOrId { get; set; }
-        };
-			
-        public struct GetCreatorByUuid200Response
-        {
-
-        }
-        public delegate void OnGetCreatorByUuid200ResponseDelegate(GetCreatorByUuid200Response Response);
-
-        public delegate void OnGetCreatorByUuid404ResponseDelegate();
-
-        public struct GetCreatorByUuidResponseCallbacks
-        {
-            public OnGetCreatorByUuid200ResponseDelegate OnGetCreatorByUuid200Response { get; set; }
-            public OnGetCreatorByUuid404ResponseDelegate OnGetCreatorByUuid404Response { get; set; }
+            public NexusSDK.AttributionAPI.Creator[] creators { get; set; }
         }
 
-        public static IEnumerator StartGetCreatorByUuidRequest(GetCreatorByUuidRequestParams RequestParams, GetCreatorByUuidResponseCallbacks ResponseCallback)
+        public delegate void OnGetCreators200ResponseDelegate(NexusSDK.AttributionAPI.GetCreators200Response Param0);
+        public static IEnumerator StartGetCreatorsRequest(GetCreatorsRequestParams RequestParams, OnGetCreators200ResponseDelegate ResponseCallback)
         {
-            string uri = "https://api.nexus.gg/v1/attributions/creators/";
+            if (RequestParams.page > 9999)
+            {
+                yield break;
+            }
 
-            //TODO: Serialize the request
+            if (RequestParams.page < 1)
+            {
+                yield break;
+            }
 
-            using(UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+            if (RequestParams.pageSize > 100)
+            {
+                yield break;
+            }
+
+            if (RequestParams.pageSize < 1)
+            {
+                yield break;
+            }
+
+            string uri = "https://api.nexus.gg/v1/attributions/creators";
+            List<string> parameterStrings = new List<string>{};
+            parameterStrings.Add("page=" + RequestParams.page);
+            parameterStrings.Add("pageSize=" + RequestParams.pageSize);
+            parameterStrings.Add("groupId=" + RequestParams.groupId);
+            uri += "?";
+            uri += string.Join("&", parameterStrings);
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
                 yield return webRequest.SendWebRequest();
-        
-                switch(webRequest.responseCode)
+                switch (webRequest.responseCode)
                 {
-    
                     case 200:
-                    if(ResponseCallback.OnGetCreatorByUuid200Response != null)
-                    {
-                        ResponseCallback.OnGetCreatorByUuid200Response(JsonConvert.DeserializeObject<GetCreatorByUuid200Response>(webRequest.downloadHandler.text));
-                    }
-                    break;
-    
-                    case 404:
-                    if(ResponseCallback.OnGetCreatorByUuid404Response != null)
-                    {
-                        ResponseCallback.OnGetCreatorByUuid404Response();
-                    }
-                    break;
+                        if (ResponseCallback != null)
+                        {
+                            var callbackData0 = JsonConvert.DeserializeObject<NexusSDK.AttributionAPI.GetCreators200Response>(webRequest.downloadHandler.text);
+                            ResponseCallback?.Invoke(callbackData0);
+                        }
+
+                        break;
                     default:
                         throw new Exception(); //TODO: Exception on error
-                    break;					
+                        break;
                 }
             }
         }
 
-        
-        public struct GetPingResponseCallbacks
+        public struct GetCreatorByUuidRequestParams
         {
-            public OnGetPing200ResponseDelegate OnGetPing200Response { get; set; }
+            public string creatorSlugOrId { get; set; }
         }
-        public delegate void OnGetPing200ResponseDelegate();
 
-
-        public static IEnumerator StartGetPingRequest(GetPingResponseCallbacks ResponseCallback)
+        public struct GetCreatorByUuid200Response
         {
-            string uri = "https://api.nexus.gg/v1/attributions/ping";
+            public struct Item0
+            {
+                public NexusSDK.AttributionAPI.CreatorGroup[] groups { get; set; }
+            }
 
-            //TODO: Serialize the request
+            public NexusSDK.AttributionAPI.GetCreatorByUuid200Response.Item0 PROP_Item0 { get; set; }
 
-            using(UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+            public NexusSDK.AttributionAPI.Creator PROP_Creator { get; set; }
+        }
+
+        public delegate void OnGetCreatorByUuid200ResponseDelegate(NexusSDK.AttributionAPI.GetCreatorByUuid200Response Param0);
+        public static IEnumerator StartGetCreatorByUuidRequest(GetCreatorByUuidRequestParams RequestParams, OnGetCreatorByUuid200ResponseDelegate ResponseCallback)
+        {
+            string uri = "https://api.nexus.gg/v1/attributions/creators/{creatorSlugOrId}";
+            uri.Replace("{creatorSlugOrId}", RequestParams.creatorSlugOrId);
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
                 yield return webRequest.SendWebRequest();
-        
-                switch(webRequest.responseCode)
+                switch (webRequest.responseCode)
                 {
-    
                     case 200:
-                    if(ResponseCallback.OnGetPing200Response != null)
-                    {
-                        ResponseCallback.OnGetPing200Response();
-                    }
-                    break;
+                        if (ResponseCallback != null)
+                        {
+                            var callbackData0 = JsonConvert.DeserializeObject<NexusSDK.AttributionAPI.GetCreatorByUuid200Response>(webRequest.downloadHandler.text);
+                            ResponseCallback?.Invoke(callbackData0);
+                        }
+
+                        break;
                     default:
                         throw new Exception(); //TODO: Exception on error
-                    break;					
+                        break;
+                }
+            }
+        }
+
+        public delegate void OnGetPing200ResponseDelegate();
+        public static IEnumerator StartGetPingRequest(OnGetPing200ResponseDelegate ResponseCallback)
+        {
+            string uri = "https://api.nexus.gg/v1/attributions/ping";
+            using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+            {
+                yield return webRequest.SendWebRequest();
+                switch (webRequest.responseCode)
+                {
+                    case 200:
+                        if (ResponseCallback != null)
+                        {
+                            ResponseCallback?.Invoke();
+                        }
+
+                        break;
+                    default:
+                        throw new Exception(); //TODO: Exception on error
+                        break;
                 }
             }
         }
