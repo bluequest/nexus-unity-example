@@ -1,0 +1,3 @@
+[submodule "Packages/nexus-unity-sdk"]
+	path = Packages/nexus-unity-sdk
+	url = git@github.com:bluequest/nexus-unity-sdk.git

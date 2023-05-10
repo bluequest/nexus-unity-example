@@ -265,7 +265,7 @@
       "url": "https://packages.unity.com"
     },
     "nexus.sdk": {
-      "version": "file:NexusSDK",
+      "version": "file:nexus-unity-sdk",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}
