@@ -8,17 +8,17 @@ using TMPro;
 
 public class UI_Ping : MonoBehaviour
 {
-    public Button PingAttributionsButton;
+    public Button ActivateButton;
     public TextMeshProUGUI outputTextField;
 
 
     void OnEnable()
     {
-        PingAttributionsButton.onClick.AddListener(() => HandleButtonClick());
+        ActivateButton.onClick.AddListener(() => HandleButtonClick());
     }
     void OnDisable()
     {
-        PingAttributionsButton.onClick.RemoveAllListeners();
+        ActivateButton.onClick.RemoveAllListeners();
     }
 
     void HandleButtonClick()
