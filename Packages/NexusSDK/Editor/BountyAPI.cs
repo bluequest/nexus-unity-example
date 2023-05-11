@@ -452,13 +452,18 @@ namespace NexusSDK
 
             string uri = "https://api.nexus.gg/v1/bounties/";
             List<string> parameterStrings = new List<string>{};
-            parameterStrings.Add("groupId=" + RequestParams.groupId);
+            if (RequestParams.groupId != "")
+            {
+                parameterStrings.Add("groupId=" + RequestParams.groupId);
+            }
+
             parameterStrings.Add("page=" + RequestParams.page);
             parameterStrings.Add("pageSize=" + RequestParams.pageSize);
             uri += "?";
             uri += string.Join("&", parameterStrings);
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
+                webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
                 yield return webRequest.SendWebRequest();
                 switch (webRequest.responseCode)
                 {
@@ -566,7 +571,11 @@ namespace NexusSDK
             string uri = "https://api.nexus.gg/v1/bounties/{bountyId}";
             uri.Replace("{bountyId}", RequestParams.bountyId);
             List<string> parameterStrings = new List<string>{};
-            parameterStrings.Add("groupId=" + RequestParams.groupId);
+            if (RequestParams.groupId != "")
+            {
+                parameterStrings.Add("groupId=" + RequestParams.groupId);
+            }
+
             parameterStrings.Add("includeProgress=" + RequestParams.includeProgress);
             parameterStrings.Add("page=" + RequestParams.page);
             parameterStrings.Add("pageSize=" + RequestParams.pageSize);
@@ -574,6 +583,7 @@ namespace NexusSDK
             uri += string.Join("&", parameterStrings);
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
+                webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
                 yield return webRequest.SendWebRequest();
                 switch (webRequest.responseCode)
                 {
@@ -680,13 +690,18 @@ namespace NexusSDK
             string uri = "https://api.nexus.gg/v1/bounties/creator/id/{creatorId}";
             uri.Replace("{creatorId}", RequestParams.creatorId);
             List<string> parameterStrings = new List<string>{};
-            parameterStrings.Add("groupId=" + RequestParams.groupId);
+            if (RequestParams.groupId != "")
+            {
+                parameterStrings.Add("groupId=" + RequestParams.groupId);
+            }
+
             parameterStrings.Add("page=" + RequestParams.page);
             parameterStrings.Add("pageSize=" + RequestParams.pageSize);
             uri += "?";
             uri += string.Join("&", parameterStrings);
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
+                webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
                 yield return webRequest.SendWebRequest();
                 switch (webRequest.responseCode)
                 {

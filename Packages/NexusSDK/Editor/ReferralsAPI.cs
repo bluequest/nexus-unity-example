@@ -113,7 +113,11 @@ namespace NexusSDK
             string uri = "https://api.nexus.gg/v1/referrals/player/{playerId}";
             uri.Replace("{playerId}", RequestParams.playerId);
             List<string> parameterStrings = new List<string>{};
-            parameterStrings.Add("groupId=" + RequestParams.groupId);
+            if (RequestParams.groupId != "")
+            {
+                parameterStrings.Add("groupId=" + RequestParams.groupId);
+            }
+
             parameterStrings.Add("page=" + RequestParams.page);
             parameterStrings.Add("pageSize=" + RequestParams.pageSize);
             parameterStrings.Add("excludeReferralList=" + RequestParams.excludeReferralList);
@@ -121,6 +125,7 @@ namespace NexusSDK
             uri += string.Join("&", parameterStrings);
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
+                webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
                 yield return webRequest.SendWebRequest();
                 switch (webRequest.responseCode)
                 {
@@ -173,11 +178,16 @@ namespace NexusSDK
             string uri = "https://api.nexus.gg/v1/referrals/player/{playerId}/code";
             uri.Replace("{playerId}", RequestParams.playerId);
             List<string> parameterStrings = new List<string>{};
-            parameterStrings.Add("groupId=" + RequestParams.groupId);
+            if (RequestParams.groupId != "")
+            {
+                parameterStrings.Add("groupId=" + RequestParams.groupId);
+            }
+
             uri += "?";
             uri += string.Join("&", parameterStrings);
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
+                webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
                 yield return webRequest.SendWebRequest();
                 switch (webRequest.responseCode)
                 {
@@ -270,7 +280,11 @@ namespace NexusSDK
             string uri = "https://api.nexus.gg/v1/referrals/code/{code}";
             uri.Replace("{code}", RequestParams.code);
             List<string> parameterStrings = new List<string>{};
-            parameterStrings.Add("groupId=" + RequestParams.groupId);
+            if (RequestParams.groupId != "")
+            {
+                parameterStrings.Add("groupId=" + RequestParams.groupId);
+            }
+
             parameterStrings.Add("page=" + RequestParams.page);
             parameterStrings.Add("pageSize=" + RequestParams.pageSize);
             parameterStrings.Add("excludeReferralList=" + RequestParams.excludeReferralList);
@@ -278,6 +292,7 @@ namespace NexusSDK
             uri += string.Join("&", parameterStrings);
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
+                webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
                 yield return webRequest.SendWebRequest();
                 switch (webRequest.responseCode)
                 {

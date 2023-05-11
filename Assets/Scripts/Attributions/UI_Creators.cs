@@ -7,7 +7,6 @@ using UnityEngine.Networking;
 using UnityEngine.Pool;
 using TMPro;
 using GetCreatorsRequestParams = NexusSDK.AttributionAPI.GetCreatorsRequestParams;
-using OnGetCreators200ResponseDelegate = NexusSDK.AttributionAPI.OnGetCreators200ResponseDelegate;
 using GetCreators200Response = NexusSDK.AttributionAPI.GetCreators200Response;
 using Creator = NexusSDK.AttributionAPI.Creator;
 
@@ -15,7 +14,7 @@ using Creator = NexusSDK.AttributionAPI.Creator;
 
 public class UI_Creators : MonoBehaviour
 {
-    public Button GetCreatorsButton;
+    public Button ActivateButton;
     public TextMeshProUGUI outputTextField;
     public GameObject InputField_Page;
     public GameObject InputField_PageSize;
@@ -24,16 +23,16 @@ public class UI_Creators : MonoBehaviour
 
     GetCreatorsRequestParams getCreatorsParameters = new GetCreatorsRequestParams();
 
-    GameObject[] SpawnedCreatorPanels;
+    List<GameObject> SpawnedCreatorPanels = new List<GameObject>{};
 
 
     void OnEnable()
     {
-        GetCreatorsButton.onClick.AddListener(() => HandleButtonClick());
+        ActivateButton.onClick.AddListener(() => HandleButtonClick());
     }
     void OnDisable()
     {
-        GetCreatorsButton.onClick.RemoveAllListeners();
+        ActivateButton.onClick.RemoveAllListeners();
     }
 
 
@@ -50,36 +49,7 @@ public class UI_Creators : MonoBehaviour
     {
         foreach (Creator creator in Response.creators)
         {
-            // SpawnedCreatorPanels.Add(Instantiate(CreatorPanelPrefab, transform));
+            SpawnedCreatorPanels.Add(Instantiate(CreatorPanelPrefab, transform));
         }
     }
-
-
-    // public class SpawnUsingPool : MonoBehaviour
-    // {
-    //     public GameObject objectPrefab;
-    //     ObjectPool<GameObject> objectPool;
-    //     void Awake()
-    //     {
-    //         objectPool = new ObjectPool<GameObject>(OnObjectCreate, OnTake, OnRelease, OnObjectDestroy);
-    //     }
-    //     GameObject OnObjectCreate()
-    //     {
-    //         GameObject newObject = Instantiate(objectPrefab);
-    //         newObject.AddComponent<PoolObject>().myPool = objectPool;
-    //         return newObject;
-    //     }
-    //     void OnTake(GameObject poolObject)
-    //     {
-    //         poolObject.SetActive(true);
-    //     }
-    //     void OnRelease(GameObject poolObject)
-    //     {
-    //         poolObject.SetActive(false);
-    //     }
-    //     void OnObjectDestroy(GameObject poolObject)
-    //     {
-    //         Destroy(poolObject);
-    //     }
-    // }
 }

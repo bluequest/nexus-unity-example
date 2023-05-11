@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 33997842}
   - component: {fileID: 33997844}
   m_Layer: 5
-  m_Name: Panel_ReferralInfoByCode
+  m_Name: Panel_ReferralCodeByPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 33997840}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: caa5b961d285f3144b06b5dfd7797c00, type: 3}
+  m_Script: {fileID: 11500000, guid: ea8e8899661217d4da84cab7bd146f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ActivateButton: {fileID: 191672861}
@@ -3318,7 +3318,7 @@ GameObject:
   - component: {fileID: 221930232}
   - component: {fileID: 221930234}
   m_Layer: 5
-  m_Name: Panel_ReferralCodeByPlayer
+  m_Name: Panel_ReferralInfoByCode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3402,7 +3402,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 221930230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea8e8899661217d4da84cab7bd146f9a, type: 3}
+  m_Script: {fileID: 11500000, guid: caa5b961d285f3144b06b5dfd7797c00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ActivateButton: {fileID: 2085352475}
@@ -7216,6 +7216,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434770895}
   m_CullTransparentMesh: 1
+--- !u!1 &445590406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 445590408}
+  - component: {fileID: 445590407}
+  m_Layer: 0
+  m_Name: APIKey
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &445590407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445590406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eca6aef03f430049852f8bb11cddca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  APIKey: nexus_pk_7784c3faa6e94c1fad8aceab27ab31e6
+--- !u!4 &445590408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445590406}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 970.7157, y: 444.45612, z: 7.2908397}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &455629627
 GameObject:
   m_ObjectHideFlags: 0
@@ -8637,7 +8682,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &533667795
 GameObject:
@@ -13148,11 +13193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e76ca5b6e7d4f47979f90c4b1775c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetCreatorsButton: {fileID: 1901154948}
+  ActivateButton: {fileID: 0}
   outputTextField: {fileID: 671390642}
   InputField_Page: {fileID: 926405678}
   InputField_PageSize: {fileID: 1857275780}
   InputField_GroupId: {fileID: 1587458512}
+  CreatorPanelPrefab: {fileID: 1379288633767221447, guid: 66588f118e8824748841bb53e7b87574, type: 3}
 --- !u!1 &787056057
 GameObject:
   m_ObjectHideFlags: 0
@@ -14962,7 +15008,7 @@ Transform:
   m_Children:
   - {fileID: 994119082}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &885953457
 GameObject:
@@ -18131,7 +18177,7 @@ RectTransform:
   - {fileID: 754537997}
   - {fileID: 2014137014}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -21533,7 +21579,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1197276253
 GameObject:
@@ -26639,7 +26685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad61f1287bcd2b140af4b47f0c17b7d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PingAttributionsButton: {fileID: 1407252839}
+  ActivateButton: {fileID: 0}
   outputTextField: {fileID: 509255679}
 --- !u!1 &1422179913
 GameObject:
@@ -33243,7 +33289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6539c9abe63fc914ca93c61be8f368e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetCreatorByIdButton: {fileID: 617465312}
+  ActivateButton: {fileID: 0}
   outputTextField: {fileID: 500213212}
   InputField_CreatorSlugOrId: {fileID: 269409571}
 --- !u!1 &1757870970

@@ -108,11 +108,16 @@ namespace NexusSDK
             List<string> parameterStrings = new List<string>{};
             parameterStrings.Add("page=" + RequestParams.page);
             parameterStrings.Add("pageSize=" + RequestParams.pageSize);
-            parameterStrings.Add("groupId=" + RequestParams.groupId);
+            if (RequestParams.groupId != "")
+            {
+                parameterStrings.Add("groupId=" + RequestParams.groupId);
+            }
+
             uri += "?";
             uri += string.Join("&", parameterStrings);
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
+                webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
                 yield return webRequest.SendWebRequest();
                 switch (webRequest.responseCode)
                 {
@@ -152,9 +157,10 @@ namespace NexusSDK
         public static IEnumerator StartGetCreatorByUuidRequest(GetCreatorByUuidRequestParams RequestParams, OnGetCreatorByUuid200ResponseDelegate ResponseCallback)
         {
             string uri = "https://api.nexus.gg/v1/attributions/creators/{creatorSlugOrId}";
-            uri.Replace("{creatorSlugOrId}", RequestParams.creatorSlugOrId);
+            uri = uri.Replace("{creatorSlugOrId}", RequestParams.creatorSlugOrId);
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
+                webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
                 yield return webRequest.SendWebRequest();
                 switch (webRequest.responseCode)
                 {
@@ -179,6 +185,7 @@ namespace NexusSDK
             string uri = "https://api.nexus.gg/v1/attributions/ping";
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
+                webRequest.SetRequestHeader("x-shared-secret", APIKeyContainer.APIKey);
                 yield return webRequest.SendWebRequest();
                 switch (webRequest.responseCode)
                 {
