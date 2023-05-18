@@ -23,7 +23,7 @@ public class UI_Ping : MonoBehaviour
 
     void HandleButtonClick()
     {
-        StartCoroutine(NexusSDK.AttributionAPI.StartGetPingRequest(OnGetPingResponse));
+        // StartCoroutine(NexusSDK.AttributionAPI.StartGetPingRequest(OnGetPingResponse));
     }
 
     void OnGetPingResponse()
