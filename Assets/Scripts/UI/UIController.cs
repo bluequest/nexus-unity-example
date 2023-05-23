@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     public GameObject[] UIPanels;
-
+    public string ActiveCode = "";
 
     public void Start()
     {
@@ -33,5 +33,10 @@ public class UIController : MonoBehaviour
         {
             panel.SetActive(false);
         }
+    }
+
+    public void SetActiveCode(string newCode)
+    {
+        ActiveCode = newCode;
     }
 }
