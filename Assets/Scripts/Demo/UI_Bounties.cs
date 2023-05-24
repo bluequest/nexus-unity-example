@@ -6,9 +6,13 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Pool;
 using TMPro;
+
 using GetBountiesRequestParams = NexusSDK.BountyAPI.GetBountiesRequestParams;
 using GetBountiesResponseCallbacks = NexusSDK.BountyAPI.GetBountiesResponseCallbacks;
 using GetBounties200Response = NexusSDK.BountyAPI.GetBounties200Response;
+using GetCreatorBountiesByIDRequestParams = NexusSDK.BountyAPI.GetCreatorBountiesByIDRequestParams;
+using GetCreatorBountiesByIDResponseCallbacks = NexusSDK.BountyAPI.GetCreatorBountiesByIDResponseCallbacks;
+using GetCreatorBountiesByID200Response = NexusSDK.BountyAPI.GetCreatorBountiesByID200Response;
 using Bounty = NexusSDK.BountyAPI.Bounty;
 using BountyError = NexusSDK.BountyAPI.BountyError;
 
