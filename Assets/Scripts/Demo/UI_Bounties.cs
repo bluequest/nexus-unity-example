@@ -45,7 +45,8 @@ public class UI_Bounties : MonoBehaviour
         requestParams.pageSize = 100;
 
         StartCoroutine(NexusSDK.BountyAPI.StartGetBountiesRequest(requestParams, 
-            new GetBountiesResponseCallbacks () {OnGetBounties200Response = OnGetBounties200ResponseFunction, OnGetBounties400Response = OnGetBounties400ResponseFunction}));
+            new GetBountiesResponseCallbacks () {OnGetBounties200Response = OnGetBounties200ResponseFunction, OnGetBounties400Response = OnGetBounties400ResponseFunction},
+            ErrorCallbackFunction));
     }
 
     void OnGetBounties200ResponseFunction(GetBounties200Response Response)
@@ -67,5 +68,10 @@ public class UI_Bounties : MonoBehaviour
     void OnGetBounties400ResponseFunction (BountyError Response)
     {
         print("Got a 400 error");
+    }
+
+    void ErrorCallbackFunction(long ErrorCode)
+    {
+        Debug.Log(ErrorCode);
     }
 }

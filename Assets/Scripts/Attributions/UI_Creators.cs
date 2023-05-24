@@ -42,7 +42,7 @@ public class UI_Creators : MonoBehaviour
         getCreatorsParameters.pageSize = InputField_PageSize.GetComponent<TMP_InputField>().text == "" ? 100 : int.Parse(InputField_PageSize.GetComponent<TMP_InputField>().text);
         getCreatorsParameters.groupId = InputField_GroupId.GetComponent<TMP_InputField>().text;
 
-        StartCoroutine(NexusSDK.AttributionAPI.StartGetCreatorsRequest(getCreatorsParameters, OnGetCreators200ResponseFunction));
+        StartCoroutine(NexusSDK.AttributionAPI.StartGetCreatorsRequest(getCreatorsParameters, OnGetCreators200ResponseFunction, ErrorCallbackFunction));
     }
 
     void OnGetCreators200ResponseFunction (GetCreators200Response Response)
@@ -51,5 +51,10 @@ public class UI_Creators : MonoBehaviour
         {
             SpawnedCreatorPanels.Add(Instantiate(CreatorPanelPrefab, transform));
         }
+    }
+
+    void ErrorCallbackFunction(long ErrorCode)
+    {
+        Debug.Log(ErrorCode);
     }
 }

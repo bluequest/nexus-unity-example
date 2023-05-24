@@ -30,7 +30,8 @@ public class UI_Referrals : MonoBehaviour
         requestParams.excludeReferralList = true;
 
         StartCoroutine(NexusSDK.ReferralsAPI.StartGetReferralInfoByPlayerIdRequest(requestParams, 
-            new GetReferralInfoByPlayerIdResponseCallbacks () {OnGetReferralInfoByPlayerId200Response = OnGetReferralInfoByPlayerId200ResponseFunction, OnGetReferralInfoByPlayerId400Response = OnGetReferralInfoByPlayerId400ResponseFunction}));
+            new GetReferralInfoByPlayerIdResponseCallbacks () {OnGetReferralInfoByPlayerId200Response = OnGetReferralInfoByPlayerId200ResponseFunction, OnGetReferralInfoByPlayerId400Response = OnGetReferralInfoByPlayerId400ResponseFunction}, 
+            ErrorCallbackFunction));
     }
     void OnDisable()
     {
@@ -59,4 +60,8 @@ public class UI_Referrals : MonoBehaviour
         te.Copy();
     }
 
+    void ErrorCallbackFunction(long ErrorCode)
+    {
+        Debug.Log(ErrorCode);
+    }
 }

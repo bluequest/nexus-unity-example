@@ -23,11 +23,16 @@ public class UI_Ping : MonoBehaviour
 
     void HandleButtonClick()
     {
-        StartCoroutine(NexusSDK.AttributionAPI.StartGetPingRequest(OnGetPingResponse));
+        StartCoroutine(NexusSDK.AttributionAPI.StartGetPingRequest(OnGetPingResponse, ErrorCallbackFunction));
     }
 
     void OnGetPingResponse()
     {
        outputTextField.text = "Ping Success";
+    }
+
+    void ErrorCallbackFunction(long ErrorCode)
+    {
+        Debug.Log(ErrorCode);
     }
 }

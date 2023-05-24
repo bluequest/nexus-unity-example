@@ -43,7 +43,8 @@ public class UI_ReferralInfoByCode : MonoBehaviour
         requestParams.excludeReferralList = ExcludReferralListButton.IsActive();
 
         StartCoroutine(NexusSDK.ReferralsAPI.StartGetReferralInfoByCodeRequest(requestParams, 
-            new GetReferralInfoByCodeResponseCallbacks () {OnGetReferralInfoByCode200Response = OnGetReferralInfoByCode200ResponseFunction, OnGetReferralInfoByCode400Response = OnGetReferralInfoByCode400ResponseFunction}));
+            new GetReferralInfoByCodeResponseCallbacks () {OnGetReferralInfoByCode200Response = OnGetReferralInfoByCode200ResponseFunction, OnGetReferralInfoByCode400Response = OnGetReferralInfoByCode400ResponseFunction},
+            ErrorCallbackFunction));
     }
 
     void OnGetReferralInfoByCode200ResponseFunction (GetReferralInfoByCode200Response Param0)
@@ -54,5 +55,10 @@ public class UI_ReferralInfoByCode : MonoBehaviour
     void OnGetReferralInfoByCode400ResponseFunction (ReferralError Param0)
     {
 
+    }
+
+    void ErrorCallbackFunction(long ErrorCode)
+    {
+        Debug.Log(ErrorCode);
     }
 }

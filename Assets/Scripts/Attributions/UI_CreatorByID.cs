@@ -32,11 +32,16 @@ public class UI_CreatorByID : MonoBehaviour
     {
         getCreatorByIdParameters.creatorSlugOrId = InputField_CreatorSlugOrId.GetComponent<TMP_InputField>().text;
 
-        StartCoroutine(NexusSDK.AttributionAPI.StartGetCreatorByUuidRequest(getCreatorByIdParameters, GetCreatorByUuid200ResponseFunction));
+        StartCoroutine(NexusSDK.AttributionAPI.StartGetCreatorByUuidRequest(getCreatorByIdParameters, GetCreatorByUuid200ResponseFunction, ErrorCallbackFunction));
     }
 
     void GetCreatorByUuid200ResponseFunction(GetCreatorByUuid200Response Response)
     {
         print("success");
+    }
+
+    void ErrorCallbackFunction(long ErrorCode)
+    {
+        Debug.Log(ErrorCode);
     }
 }

@@ -52,7 +52,7 @@ public class UI_SupportACreator : MonoBehaviour
         requestParams.pageSize = 99;
         requestParams.groupId = "";
         StartCoroutine(NexusSDK.AttributionAPI.StartGetCreatorsRequest(requestParams, 
-            OnGetCreators200ResponseFunction));
+            OnGetCreators200ResponseFunction, ErrorCallbackFunction));
     }
 
     void OnGetCreators200ResponseFunction(GetCreators200Response Response)
@@ -75,5 +75,10 @@ public class UI_SupportACreator : MonoBehaviour
             txtSetCreatorCodeObject.SetActive(true);
             txtSetCreatorCode.text = GameObject.Find("UIController").GetComponent<UIController>().ActiveCode;
         }
+    }
+
+    void ErrorCallbackFunction(long ErrorCode)
+    {
+        Debug.Log(ErrorCode);
     }
 }
