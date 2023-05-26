@@ -8,11 +8,18 @@ using TMPro;
 
 public class DebugLog : MonoBehaviour
 {
+    public static DebugLog Singleton;
     public bool DebugLogActive = false;
     public GameObject ContentPanel;
     public Transform ScrollContentPanel;
     public GameObject DebugMessagePrefab;
     List<GameObject> SpawnedDebugMessages = new List<GameObject>{};
+
+    void Awake()
+    {
+        NexusSDK.AttributionAPI.TestLog.AddListener(AddDebugMessage);
+        Singleton = this;
+    }
 
     public void AddDebugMessage(string message)
     {
