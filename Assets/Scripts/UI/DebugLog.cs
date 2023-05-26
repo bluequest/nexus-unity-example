@@ -17,8 +17,6 @@ public class DebugLog : MonoBehaviour
 
     void Awake()
     {
-        NexusSDK.AttributionAPI.TestLog.AddListener(AddDebugMessage);
-        Singleton = this;
     }
 
     public void AddDebugMessage(string message)
