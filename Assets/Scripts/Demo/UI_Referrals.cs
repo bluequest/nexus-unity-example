@@ -31,6 +31,9 @@ public class UI_Referrals : MonoBehaviour
         requestParams.page = 1;
         requestParams.pageSize = 99;
         requestParams.groupId = "";
+
+        GameObject.Find("DebugLog").GetComponent<DebugLog>().AddDebugMessage("About to Call Start Get Creators");
+
         StartCoroutine(NexusSDK.AttributionAPI.StartGetCreatorsRequest(requestParams, 
             OnGetCreators200ResponseFunction, ErrorCallbackFunction));
     }
