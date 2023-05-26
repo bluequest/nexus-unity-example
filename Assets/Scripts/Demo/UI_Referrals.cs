@@ -43,6 +43,7 @@ public class UI_Referrals : MonoBehaviour
     void OnGetCreators200ResponseFunction(GetCreators200Response Response)
     {
         print("Get Creators 200 response");
+        GameObject.Find("DebugLog").GetComponent<DebugLog>().AddDebugMessage("Get Creators 200 response");
 
         foreach (Creator creator in Response.creators)
         {
@@ -66,6 +67,7 @@ public class UI_Referrals : MonoBehaviour
     void  OnGetReferralInfoByPlayerId200ResponseFunction(GetReferralInfoByPlayerId200Response Response)
     {
         print("Referral return 200 success");
+        GameObject.Find("DebugLog").GetComponent<DebugLog>().AddDebugMessage("Get Referral Info by Player ID 200 response");
         
         localReferralCode.text = Response.referralCodes[0].code;
     }
@@ -73,6 +75,7 @@ public class UI_Referrals : MonoBehaviour
     void OnGetReferralInfoByPlayerId400ResponseFunction (ReferralError Response)
     {
         print("Got a 400 error");
+        GameObject.Find("DebugLog").GetComponent<DebugLog>().AddDebugMessage("Get Referral Info by Player ID 400 response");
     }
 
 
@@ -87,5 +90,6 @@ public class UI_Referrals : MonoBehaviour
     void ErrorCallbackFunction(long ErrorCode)
     {
         Debug.Log(ErrorCode);
+        GameObject.Find("DebugLog").GetComponent<DebugLog>().AddDebugMessage(ErrorCode.ToString());
     }
 }
